@@ -20,19 +20,35 @@
         <div class="col-md-8">
           <div class="card">
             <div class="card-body">
-              <form id="todo-form" method="post" action="scripts/salvar.php">
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="todo-input"
-                    name="add"
-                    placeholder="Adicione uma atividade"
-                    required
-                  />
-                  <button class="btn btn-primary" type="submit">
-                    Adicione
-                  </button>
+              <form id="todo-form" class="row g-2" method="post" action="scripts/salvar.php">
+                <div class="col-md-12">
+                  <label for="inputEmail4" class="form-label">Cadestre uma Tarefa</label>
+                  <input type="text" name="cad_tarefa" required class="form-control" id="inputEmail4">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">Data de Conclusão</label>
+                  <input type="date" name="dt_conclusao" required class="form-control" id="inputEmail4">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">Criticidade</label>
+                    <select name="criticidade" class="form-control" required>
+                      <option value="">-</option>
+                      <option value="Baixa">Baixa</option>
+                      <option value="Média">Média</option>
+                      <option value="Alta">Alta</option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                  <label for="inputEmail4" class="form-label">Responsável</label>
+                    <select name="responsavel" class="form-control" required>
+                      <option value="">-</option>
+                      <option value="Adriana">Adriana</option>
+                      <option value="Romeu">Romeu</option>
+                      <option value="Etevaldo">Etevaldo</option>
+                    </select>
+                </div>
+                <div class="col-md-12 text-center d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-large">Salvar</button>
                 </div>
               </form>
               <table id="example" class="display table table-striped text-center " style="width: 100%">
@@ -46,22 +62,21 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                    include "scripts/config.php";
+                    $sql = "SELECT * FROM tarefas";
+                    $query = $mysqli->query($sql);
+                    while($dados = $query->fetch_array()){
+                  ?>
                   <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
+                    <td><?php echo $dados['nome_tarefa']; ?></td>
+                    <td><?php echo $dados['criticidade']; ?></td>
+                    <td><?php echo $dados['data_conclusao']; ?></td>
+                    <td><?php echo $dados['responsavel']; ?></td>
                     <td><i class="fa-solid fa-pen-to-square btn btn-primary"></i></td>
                     <td><i class="fa-solid fa-trash btn btn-danger"></i></td>
                   </tr>
-                  <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td><i class="fa-solid fa-pen-to-square btn btn-primary"></i></td>
-                    <td><i class="fa-solid fa-trash btn btn-danger"></i></td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
                 <tfoot>
                   <tr>
