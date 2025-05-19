@@ -74,7 +74,11 @@
                     <td><?php echo $dados['data_conclusao']; ?></td>
                     <td><?php echo $dados['responsavel']; ?></td>
                     <td><i class="fa-solid fa-pen-to-square btn btn-primary"></i></td>
-                    <td><i class="fa-solid fa-trash btn btn-danger"></i></td>
+                    <td>
+                      <a href="scripts/deletar.php?id=<?php echo $dados['id']; ?>">
+                        <i class="fa-solid fa-trash btn btn-danger"></i>
+                      </a>
+                    </td>
                   </tr>
                   <?php } ?>
                 </tbody>
